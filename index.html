@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ato Abeba Retta Foundation - Critical Evaluation Questionnaire</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #eff6ff;
+            --success: #15803d;
+            --success-bg: #f0fdf4;
+            --warning: #b45309;
+            --warning-bg: #fefce8;
+            --danger: #b91c1c;
+            --danger-bg: #fef2f2;
+            --text: #1f2937;
+            --text-light: #4b5563;
+            --border: #e5e7eb;
+            --bg: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+
+        /* Access Form Gate */
+        #access-gate {
+            max-width: 500px;
+            margin: 40px auto;
+            background: var(--primary-light);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #bfdbfe;
+        }
+
+        #access-gate h2 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Questionnaire Layout */
+        #questionnaire-content {
+            display: none;
+        }
+
+        .user-badge {
+            background: #f3f4f6;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            display: inline-block;
+            color: var(--text-light);
+        }
+
+        .question-block {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        .question-block:last-child {
+            border-bottom: none;
+        }
+
+        .question-text {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .option-card {
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .option-card:hover {
+            background-color: #fcfcfc;
+            border-color: #cbd5e1;
+        }
+
+        .option-card input[type="radio"] {
+            margin-top: 4px;
+            transform: scale(1.1);
+        }
+
+        .option-label {
+            flex: 1;
+        }
+
+        .flag-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-top: 4px;
+        }
+
+        .flag-green { background: var(--success-bg); color: var(--success); }
+        .flag-yellow { background: var(--warning-bg); color: var(--warning); }
+        .flag-red { background: var(--danger-bg); color: var(--danger); }
+
+        .context-area {
+            margin-top: 12px;
+        }
+
+        .context-area p {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        #print-btn {
+            background-color: #4b5563;
+        }
+        #print-btn:hover {
+            background-color: #374151;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 0; }
+            #access-gate, .action-buttons { display: none !important; }
+            #questionnaire-content { display: block !important; }
+            textarea { border: 1px solid #9ca3af !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Ato Abeba Retta Foundation</h1>
+        <p class="subtitle">Critical Accountability & Due Diligence Questionnaire</p>
+    </header>
+
+    <!-- STEP 1: ACCESS GATE -->
+    <div id="access-gate">
+        <h2>Verification Access</h2>
+        <form id="gate-form" onsubmit="grantAccess(event)">
+            <div class="form-group">
+                <label for="user-name">Full Name</label>
+                <input type="text" id="user-name" required placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="user-email">Email Address</label>
+                <input type="email" id="user-email" required placeholder="john@example.com">
+            </div>
+            <button type="submit">Access Questionnaire</button>
+        </form>
+    </div>
+
+    <!-- STEP 2: QUESTIONNAIRE CONTENT -->
+    <div id="questionnaire-content">
+        <div class="user-badge" id="user-badge-text"></div>
+
+        <form id="audit-form">
+            
+            <!-- Q1 -->
+            <div class="question-block">
+                <div class="question-text">1. Who actually owns the existing school receiving these funds?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q1" value="A">
+                        <div class="option-label">
+                            <strong>A) The Government / Public System</strong>
+                            <div>Regulated public institution; funds provide supplemental assistance.</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q1" value="B">
+                        <div class="option-label">
+                            <strong>B) A Local NGO / Registered Religious Order</strong>
+                            <div>Usually compliant, but demands verification of local credentials.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q1" value="C">
+                        <div class="option-label">
+                            <strong>C) A Private Individual or Family Unit</strong>
+                            <div>Run as a private entity. Donations run the risk of becoming direct owner equity.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q1_notes" placeholder="Provide names, registration numbers, or owner backgrounds..."></textarea>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="question-block">
+                <div class="question-text">2. Why exactly does this school need this money right now?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q2" value="A">
+                        <div class="option-label">
+                            <strong>A) Specific expansion or historic textbook gap</strong>
+                            <div>Funding targeted missing resources to expand capacity for student enrollment.</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q2" value="B">
+                        <div class="option-label">
+                            <strong>B) Prior structural sponsor pulled out</strong>
+                            <div>Sponsor left, requiring unexpected emergency funding. Demands validation on why the previous source left.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q2" value="C">
+                        <div class="option-label">
+                            <strong>C) General resource scarcity with no historical baseline</strong>
+                            <div>No record of how books or supplies were handled previously. Highly ambiguous.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q2_notes" placeholder="Detail the clear historical shift or situational trigger..."></textarea>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="question-block">
+                <div class="question-text">3. Who holds transaction authority on the accounts receiving the money?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q3" value="A">
+                        <div class="option-label">
+                            <strong>A) The US Non-profit procures everything directly</strong>
+                            <div>Cash is not transferred to external parties; the US non-profit buys from local vendors natively.</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q3" value="B">
+                        <div class="option-label">
+                            <strong>B) Joint institutional account requiring multi-party approval</strong>
+                            <div>Wired to a school account requiring signatures from both the charity and the principal.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q3" value="C">
+                        <div class="option-label">
+                            <strong>C) Transferred entirely into a single individual's account</strong>
+                            <div>Wired directly to the principal or administrator with full unmonitored spending rights.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q3_notes" placeholder="Specify signing individuals, banks used, and signature regulations..."></textarea>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="question-block">
+                <div class="question-text">4. What process verifies that physical supplies reach the intended students?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q4" value="A">
+                        <div class="option-label">
+                            <strong>A) Independent third-party physical audit</strong>
+                            <div>An independent local professional or separate entity physically counts and inventories deliveries.</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q4" value="B">
+                        <div class="option-label">
+                            <strong>B) Photographic or basic video evidence from internal staff</strong>
+                            <div>Internal school staff submits media confirmation showing students holding supplies. Highly vulnerable to staging.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q4" value="C">
+                        <div class="option-label">
+                            <strong>C) Unverified relational trust</strong>
+                            <div>Relying strictly on historical character trust without systematic confirmation.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q4_notes" placeholder="Define exact validation mechanics or name independent auditors..."></textarea>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="question-block">
+                <div class="question-text">5. What is the precision level of the fundraising spending allocation?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q5" value="A">
+                        <div class="option-label">
+                            <strong>A) Itemized line-item ledger</strong>
+                            <div>Transparently broken down by units (e.g., exactly 600 textbooks at a set price point per unit).</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q5" value="B">
+                        <div class="option-label">
+                            <strong>B) Broad program funding allocations</strong>
+                            <div>Earmarked broadly for a "Literacy Expansion Campaign" without granular line-item prices.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q5" value="C">
+                        <div class="option-label">
+                            <strong>C) General slush fund infrastructure</strong>
+                            <div>Transferred as blanket capital with full local executive discretion over utilization.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q5_notes" placeholder="Attach or describe itemized lists or project frameworks..."></textarea>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="question-block">
+                <div class="question-text">6. How are localized import tariffs, shipping, and entry logistics managed?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q6" value="A">
+                        <div class="option-label">
+                            <strong>A) In-country localized sourcing</strong>
+                            <div>No international shipping. Items are purchased inside the country, protecting the capital from customs risk.</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q6" value="B">
+                        <div class="option-label">
+                            <strong>B) Formally budgeted logistics allocations</strong>
+                            <div>Shipped internationally with clear, verified reserves for custom processing and legal tax clearing.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q6" value="C">
+                        <div class="option-label">
+                            <strong>C) Disorganized structural planning</strong>
+                            <div>"We'll cross that bridge when it arrives." High probability of cargo seizures or reliance on bribery.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q6_notes" placeholder="Detail the sourcing logistics approach or local supply vendors..."></textarea>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="question-block">
+                <div class="question-text">7. Are there interpersonal conflicts of interest between charity leadership and school management?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q7" value="A">
+                        <div class="option-label">
+                            <strong>A) Purely objective transactional affiliation</strong>
+                            <div>Partnership is based completely on rigorous independent evaluation and need metrics.</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q7" value="B">
+                        <div class="option-label">
+                            <strong>B) Heritage connection with fully separated fiduciary boards</strong>
+                            <div>Founders hold deep ancestral or emotional ties to the area, but operational and fiscal boards are structurally decoupled.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q7" value="C">
+                        <div class="option-label">
+                            <strong>C) Overlapping family or internal networks</strong>
+                            <div>The domestic board members are closely related by blood or business to the school's local management team.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q7_notes" placeholder="Disclose personal, familial, or historic organizational overlaps here..."></textarea>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="question-block">
+                <div class="question-text">8. What is the long-term material sustainability model?</div>
+                <div class="options-container">
+                    <label class="option-card">
+                        <input type="radio" name="q8" value="A">
+                        <div class="option-label">
+                            <strong>A) Programmatic phase-out paired with local capacity building</strong>
+                            <div>Capital injections are strictly leveraged to establish community-owned income pipelines (e.g., school farms, fee models) to ensure future self-reliance.</div>
+                            <span class="flag-tag flag-green">Green Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q8" value="B">
+                        <div class="option-label">
+                            <strong>B) Indefinite subscription-based commitment</strong>
+                            <div>The charity intends to fund the recurring supplies continuously. High vulnerability to donor fatigue over time.</div>
+                            <span class="flag-tag flag-yellow">Yellow Flag</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="q8" value="C">
+                        <div class="option-label">
+                            <strong>C) Isolated structural band-aid allocation</strong>
+                            <div>One-off funding injection with no strategic tracking for when supplies exhaust. School returns to structural baseline immediately.</div>
+                            <span class="flag-tag flag-red">Red Flag</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="context-area">
+                    <p>Additional Notes / Explanatory Evidence:</p>
+                    <textarea name="q8_notes" placeholder="Outline the transition milestones or continuous giving infrastructure..."></textarea>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" id="print-btn" onclick="window.print()">Print / Save as PDF</button>
+                <button type="button" onclick="submitForm()">Submit Assessment</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function grantAccess(e) {
+        e.preventDefault();
+        const name = document.getElementById('user-name').value;
+        const email = document.getElementById('user-email').value;
+
+        if (name && email) {
+            document.getElementById('access-gate').style.display = 'none';
+            const content = document.getElementById('questionnaire-content');
+            content.style.display = 'block';
+            document.getElementById('user-badge-text').innerText = `Reviewer Profile: ${name} (${email})`;
+        }
+    }
+
+    function submitForm() {
+        alert("Assessment layout recorded locally. To officially save or share this response with your board, please click 'Print / Save as PDF' and select 'Save as PDF' to generate a permanent digital record.");
+    }
+</script>
+
+</body>
+</html>
